@@ -1,0 +1,21 @@
+<h1>商品新規登録</h1>
+<%= form_with model: @items, local:true do |f| %>
+
+ <h4></h4>
+ <%= f.attachment_field :image %>
+
+ <h4></h4>
+ <%= f.text_field :name %>
+
+ <h4></h4>
+ <%= f.text_area :introduction %>
+
+ <h4>ジャンル</h4>
+ <%= f.select :genre_id %>
+
+ <h4>税務機価格</h4>
+ <%= f.number_field :price %>
+
+ <%= f.submit '新規投稿' %>
+
+ <% end %>
