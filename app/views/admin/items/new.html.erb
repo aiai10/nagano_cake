@@ -1,21 +1,23 @@
-<h1>商品新規登録</h1>
-<%= form_with model: @items, local:true do |f| %>
-
- <h4></h4>
- <%= f.attachment_field :image %>
-
- <h4></h4>
- <%= f.text_field :name %>
-
- <h4></h4>
- <%= f.text_area :introduction %>
-
- <h4>ジャンル</h4>
- <%= f.select :genre_id %>
-
- <h4>税務機価格</h4>
- <%= f.number_field :price %>
-
- <%= f.submit '新規投稿' %>
-
- <% end %>
+<div class="container">
+  <div class="row">
+    <div class="offset-md-2 col-md-8 offset-md-2">
+      <h4>商品新規登録</h4>
+      <%= form_with model: @item, url:admin_items_path, local:true do |f| %>
+        <p>商品画像</p>
+          <%= f.attachment_field :image %>
+        <p>商品名</p>
+          <%= f.text_field :name %>
+        <p>商品説明</p>
+          <%= f.text_area :introduction %>
+        <p>ジャンル</p>
+          <%= f.collection_select(:genre_id, @genres, :id, :name) %>
+        <p>税抜価格</p>
+          <%= f.number_field :price %>円
+        <p>販売ステータス</p>
+          <%= f.radio_button :is_active, true %>販売中
+          <%= f.radio_button :is_active, false %>販売停止中
+        <p><%= f.submit '新規投稿', class: "btn btn-success" %></p>
+      <% end %>
+    </div>
+  </div>
+</div>

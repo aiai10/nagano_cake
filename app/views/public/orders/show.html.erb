@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+    <h4>注文情報</h4>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>注文日</th>
+            <td><%= l @order.created_at, format: :short %></td>
+          </tr>
+          <tr>
+            <th>配送先</th>
+            <td>
+              <%= @order.postal_code %>
+              <%= @order.address %>
+              <%= @order.name %>
+            </td>
+          </tr>
+          <tr>
+            <th>支払方法</th>
+            <td><%= @order.payment_method_i18n %></td>
+          </tr>
+          <tr>
+            <th>ステータス</th>
+            <td><%= @order.status_i18n %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <h4>請求情報</h4>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>商品合計</th>
+            <td><%= @order.total_payment %></td>
+          </tr>
+          <tr>
+            <th>配送先</th>
+            <td><%= @order.shipping_cost %></td>
+          </tr>
+          <tr>
+            <th>ご請求金額</th>
+            <td> <%= @order.total_payment + @order.shipping_cost %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+    <h4>注文内容</h4>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>商品</th>
+          <th>単価(税込)</th>
+          <th>個数</th>
+          <th>小計</th>
+        </tr>
+        <% @order.order_details.each do |order_detail| %>
+        <tr>
+            <td><%= order_detail.item.name %></td>
+            <td><%= order_detail.item.with_tax_price %></td>
+            <td><%= order_detail.amount %></td>
+            <td><%= order_detail.item.with_tax_price * order_detail.amount %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>

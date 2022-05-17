@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="offset-md-2 col-md-2">
+        <%= attachment_image_tag @item, :image, size:"150x150", fallback: "no_image.jpg" %>
+    </div>
+    <div class="col-md-8">
+      <%= form_with model: @cart_item, url:cart_items_path, method: :post, local:true do |f| %>
+        <h4><%= @item.name %></h4>
+        <p><%= @item.introduction %></p>
+        <h5><%= @item.price %></h5>
+        <%= f.hidden_field :item_id, value: @item.id %>
+        <%= f.select :amount, *[1..10] %>
+        <%= f.submit 'カートに入れる', class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>

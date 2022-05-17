@@ -1,0 +1,20 @@
+<div class="container">
+    <div class="row">
+      <div class="offset-md-3 col-md-9">
+        <h1>本当に退会しますか？</h1>
+        <p>退会すると、会員登録情報や</p>
+        <p>これまでの購入履歴が閲覧できなくなります。</p>
+        <p>退会する場合は、「退会する」をクリックしてください。</p>
+      </div>
+      <div class="offset-md-3 col-md-2">
+        <%= link_to "退会しない", customer_path(@customer), class: "btn btn-primary" %></td>
+      </div>
+      <div class="offset-md-1 col-md-3">
+        <%= form_with model: @customer, url:withdraw_customer_path, method: :patch, local:true do |customer| %>
+          <%= customer.hidden_field :is_deleted, value: true %>
+          <%= customer.submit '退会する', class: "btn btn-danger" %>
+        <%end %>
+      </div>
+    </div>
+  </div>
+</div>
